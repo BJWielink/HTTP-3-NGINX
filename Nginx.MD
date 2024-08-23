@@ -36,7 +36,7 @@ echo -e "Package: *\nPin: origin nginx.org\nPin: release o=nginx\nPin-Priority: 
 ## Nginx configuration
 
 `cd /etc/nginx`\
-`nano nginx.conf`\
+`nano nginx.conf`
 
 ```nginx
 user www-data;
@@ -142,6 +142,14 @@ server {
 
        ssl_certificate /etc/nginx/ssl/domain.cert.pem;
        ssl_certificate_key /etc/nginx/ssl/private.key.pem;
+       ssl_trusted_certificate /etc/ssl/certs/ca-certificates.crt;
+
+       ssl_session_timeout 1h;
+       ssl_buffer_size 4k;
+       ssl_stapling on;
+
+       quic_retry on;
+       ssl_early_data on;
 
        server_name **SERVER_NAME_HERE**;
        keepalive_timeout 70;
@@ -150,6 +158,7 @@ server {
        index index.html index.html;
 
        location / {
+               add_header Strict-Transport-Security max-age=15768000;
                add_header Alt-Svc 'h3=":443"; ma=86400';
                try_files $uri $uri/ =404;
        }
