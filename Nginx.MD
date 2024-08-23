@@ -43,7 +43,6 @@ user www-data;
 worker_processes auto;
 pid /run/nginx.pid;
 error_log /var/log/nginx/error.log;
-include /etc/nginx/modules-enabled/*.conf;
 
 events {
 	worker_connections 768;
@@ -97,7 +96,7 @@ http {
 	# Virtual Host Configs
 	##
 
-	include /etc/nginx/conf.d/*.conf;
+	# include /etc/nginx/conf.d/*.conf;
 	include /etc/nginx/sites-enabled/*;
 }
 
