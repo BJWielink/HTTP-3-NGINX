@@ -168,9 +168,12 @@ server {
 `sudo ln -s /etc/nginx/sites-available/**SERVER_NAME_HERE** /etc/nginx/sites-enabled/**SERVER_NAME_HERE**`
 
 ## Generating SSL certificate
+This has to be ran after the sites in Nginx are already set because it will automatically edit
+the Nginx config.
+
 `sudo apt install certbot python3-certbot-nginx`\
 `sudo certbot --nginx`
 
-Optioneel:
-- Controleer of de renew cronjob is ingeschakeld: `sudo systemctl status certbot.timer`
-- Controleer of certbot een nieuw certificaat aan kan maken: `sudo certbot renew --dry-run`
+Optionally:
+- Check if the cronjob is enabled: `sudo systemctl status certbot.timer`
+- Check if certbot can renew the certificate: `sudo certbot renew --dry-run`
